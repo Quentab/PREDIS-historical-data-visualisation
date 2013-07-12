@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?scenebuilder-background-color linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, 0xff0000ff 0.0%, 0x0000ffff 30.0%, 0x000000ff 100.0%)?>
+<?scenebuilder-stylesheet C:/projets/javafx-samples-2.2.25/src/Ensemble/resources/javadoc-stylesheet.css?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0002999999924" prefWidth="1001.0000999999975" xmlns:fx="http://javafx.com/fxml" fx:controller="ihm.DATAController">
+  <children>
+    <SplitPane dividerPositions="0.042709848581805224" focusTraversable="true" orientation="VERTICAL" prefHeight="509.0000999999975" prefWidth="572.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="26.0" prefWidth="570.0">
+          <children>
+            <MenuBar fx:id="menus" minHeight="23.0" prefHeight="111.0" prefWidth="570.0" useSystemMenuBar="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <TabPane prefHeight="482.0" prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab text="Visualisation">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                        <SplitPane dividerPositions="0.5008130081300813" focusTraversable="true" orientation="VERTICAL" prefHeight="451.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                              <children>
+                                <LineChart fx:id="chart" onMouseDragged="#importData" prefHeight="223.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <xAxis>
+                                    <CategoryAxis fx:id="xAxis" animated="true" cache="true" cacheHint="SPEED" endMargin="0.0" gapStartAndEnd="false" pickOnBounds="true" side="BOTTOM" startMargin="0.0" />
+                                  </xAxis>
+                                  <yAxis>
+                                    <NumberAxis fx:id="yAxis" forceZeroInRange="false" side="LEFT" />
+                                  </yAxis>
+                                </LineChart>
+                                <Slider fx:id="xSlide" blockIncrement="3.0" onKeyReleased="#cursorChanged" onMouseExited="#cursorChanged" prefWidth="515.0" showTickLabels="false" showTickMarks="false" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="16.0" />
+                                <ToolBar prefWidth="166.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="6.0">
+                                  <items>
+                                    <Button mnemonicParsing="false" onMouseClicked="#zoomOutXaxis" text=" -" />
+                                    <TextField fx:id="textTailleZoom" alignment="CENTER" prefHeight="26.0" prefWidth="76.0" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#zoomInXaxis" text="+" />
+                                  </items>
+                                </ToolBar>
+                                <Group id="Group" fx:id="groupeMessage" layoutX="430.0" layoutY="34.0" visible="true">
+                                  <children>
+                                    <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0">
+                                      <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0xff0000ff 10.0%, 0x0000ffff 10.0%, 0x000000ff 100.0%)" height="75.9999008178711" layoutX="0.0" layoutY="0.0" stroke="#0021cc" strokeType="INSIDE" strokeWidth="0.0" width="241.0" />
+                                        <Text fill="#ccedff" fontSmoothingType="LCD" layoutX="31.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chargement de la variable" textAlignment="CENTER">
+                                          <font>
+                                            <Font name="System Bold" size="15.0" fx:id="x3" />
+                                          </font>
+                                        </Text>
+                                        <Text fill="#ccf9ff" font="$x3" layoutX="56.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez patienter" />
+                                      </children>
+                                    </AnchorPane>
+                                  </children>
+                                </Group>
+                              </children>
+                            </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="568.0">
+                              <children>
+                                <Accordion prefHeight="305.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <expandedPane>
+                                    <TitledPane fx:id="x4" animated="false" font="$x3" text="Gestion et affichage ">
+                                      <content>
+                                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                          <children>
+                                            <SplitPane dividerPositions="0.32593340060544906" focusTraversable="true" onDragOver="#addVariableToService" onMouseDragEntered="#addVariableToService" prefHeight="257.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                              <items>
+                                                <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="320.0">
+                                                  <children>
+                                                    <ListView fx:id="servicesList" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectService" prefHeight="233.0" prefWidth="354.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="21.0" />
+                                                    <Label layoutX="14.0" prefHeight="19.0" prefWidth="58.0" text="Services" AnchorPane.topAnchor="2.0">
+                                                      <font>
+                                                        <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x1" />
+                                                      </font>
+                                                    </Label>
+                                                    <ToolBar prefWidth="353.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0">
+                                                      <items>
+                                                        <Label text="Services">
+                                                          <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                          </font>
+                                                        </Label>
+                                                        <Button mnemonicParsing="false" prefWidth="58.0" text="Delete" />
+                                                        <Button mnemonicParsing="false" onMouseClicked="#addService" prefWidth="58.0" text="New" />
+                                                        <TextField fx:id="newServ" prefWidth="94.0" promptText="Name" />
+                                                      </items>
+                                                    </ToolBar>
+                                                  </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                  <children>
+                                                    <SplitPane dividerPositions="0.49924585218702866" focusTraversable="true" prefHeight="255.0" prefWidth="749.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <items>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                          <children>
+                                                            <ListView id="variables" fx:id="allVariablesList1" minWidth="-Infinity" onDragDetected="#addVariableToService" onMouseClicked="#importData" onMouseEntered="#refreshAllVariableList" prefHeight="235.0" prefWidth="355.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
+                                                            <Label font="$x1" layoutX="14.0" prefHeight="19.0" prefWidth="76.0" text="All Variables" AnchorPane.topAnchor="0.0" />
+                                                          </children>
+                                                        </AnchorPane>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" onMouseDragged="#addVariableToService" prefHeight="160.0" prefWidth="100.0">
+                                                          <children>
+                                                            <Label font="$x1" layoutX="14.0" prefHeight="19.0" prefWidth="110.0" text="Variables-Service" AnchorPane.topAnchor="0.0" />
+                                                            <ListView fx:id="variablesList" onDragDetected="#deleteVariableFromService" onMouseClicked="#importData" onMouseDragExited="#deleteVariableFromService" prefHeight="234.0" prefWidth="356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
+                                                          </children>
+                                                        </AnchorPane>
+                                                      </items>
+                                                    </SplitPane>
+                                                  </children>
+                                                </AnchorPane>
+                                              </items>
+                                            </SplitPane>
+                                          </children>
+                                        </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                  </expandedPane>
+                                  <panes>
+                                    <fx:reference source="x4" />
+                                    <TitledPane fx:id="x2" animated="false" font="$x3" text="Export Variable">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                          <children>
+                                            <SplitPane dividerPositions="0.15539858728557013" focusTraversable="true" prefHeight="256.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                              <items>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                  <children>
+                                                    <Label text="Services" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.0" />
+                                                    <ListView fx:id="servicesListExport" onMouseClicked="#refreshVariableListExport" onMouseEntered="#refreshServiceList" prefHeight="426.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0" />
+                                                  </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                  <children>
+                                                    <SplitPane dividerPositions="0.4411057692307692" focusTraversable="true" prefHeight="450.0" prefWidth="752.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                                      <items>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                          <children>
+                                                            <ListView fx:id="variablesListExport" onMouseClicked="#dragVariableToExport" prefHeight="425.0" prefWidth="332.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0" />
+                                                            <Label layoutX="14.0" layoutY="6.0" text="Variables" />
+                                                          </children>
+                                                        </AnchorPane>
+                                                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="506.0">
+                                                          <children>
+                                                            <SplitPane dividerPositions="0.6652719665271967" focusTraversable="true" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="253.0" prefWidth="488.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                              <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                  <children>
+                                                                    <ListView fx:id="listVariableToExport" onMouseClicked="#deleteVariableFromExport" prefHeight="96.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0" />
+                                                                    <Label layoutX="14.0" layoutY="6.0" text="Variable a exporter" />
+                                                                  </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="77.0" prefWidth="462.0">
+                                                                  <children>
+                                                                    <ToolBar maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="77.0" prefWidth="462.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                      <items>
+                                                                        <ChoiceBox fx:id="typeExportChoice" onMouseExited="#exportData" prefWidth="94.0">
+                                                                          <items>
+                                                                            <FXCollections fx:factory="observableArrayList">
+                                                                              <String fx:value="Item 1" />
+                                                                              <String fx:value="Item 2" />
+                                                                              <String fx:value="Item 3" />
+                                                                            </FXCollections>
+                                                                          </items>
+                                                                        </ChoiceBox>
+                                                                        <TextField prefWidth="114.0" promptText="Date de début" />
+                                                                        <TextField prefWidth="114.0" promptText="Date de fin" />
+                                                                        <Button mnemonicParsing="false" onMouseClicked="#exportData" prefWidth="94.0" text="Lancer Export" />
+                                                                      </items>
+                                                                    </ToolBar>
+                                                                    <Slider fx:id="sliderFin" blockIncrement="1.0" layoutX="10.0" layoutY="50.0" prefWidth="427.0" snapToTicks="false" value="100.0" />
+                                                                    <Slider fx:id="sliderDebut" layoutX="10.0" layoutY="58.0" prefWidth="425.0" showTickLabels="false" showTickMarks="false" />
+                                                                  </children>
+                                                                </AnchorPane>
+                                                              </items>
+                                                            </SplitPane>
+                                                          </children>
+                                                        </AnchorPane>
+                                                      </items>
+                                                    </SplitPane>
+                                                  </children>
+                                                </AnchorPane>
+                                              </items>
+                                            </SplitPane>
+                                          </children>
+                                        </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                  </panes>
+                                </Accordion>
+                              </children>
+                            </AnchorPane>
+                          </items>
+                        </SplitPane>
+                      </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab closable="false" disable="false" styleClass="NavBarCell1Rev" text="PhpMyAdmin">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                        <WebView fx:id="web" prefHeight="445.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                      </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
