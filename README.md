@@ -18,8 +18,10 @@ connector to JAVA - GUI based on JAVAFX 2.2associated with the builder JAVAFX Sc
 
 Sources are developped in a Netbeans 7.3 Environment. The project is a MAVEN Dependancy working fine with javaFX tanks to the Zonski's plugin
 
+
     https://github.com/zonski/javafx-maven-plugin
     ----------------------------------------------
+    
 
 See the POM file for more details.
 
