@@ -1,6 +1,6 @@
-++++++++++++++++++++++++++++++++++++++++++++++++
-PREDIS-historical-data-visualisation | purose  +
-_______________________________________________+
+++++++++++++++++++++++++++++++++++++++++++++++++\n
+PREDIS-historical-data-visualisation | purose  +\n
+_______________________________________________+\n
 
 
 Project description : PREDIS is a teaching and reasearch
