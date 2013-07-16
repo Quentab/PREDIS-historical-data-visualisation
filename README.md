@@ -1,4 +1,3 @@
-
 PREDIS-historical-data-visualisation | purose 
 _______________________________________________
 
@@ -6,6 +5,8 @@ _______________________________________________
 Project description : PREDIS is a teaching and reasearch platform that  focuse son building smart homes. Parts of the G2ELAB, the Grenoble Electrical Engineering Laboratory.
 
 PREDIS manages medium scale data logging to produce thermical and  electrical models of buildings that generate energy saving.
+
+
 
 
 PREDIS-historical-data-visualisation | software details 
