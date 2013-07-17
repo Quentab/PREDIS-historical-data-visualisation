@@ -50,7 +50,7 @@ import java.lang.Math;
 import java.text.SimpleDateFormat;
 import java.util.ListIterator;
 import java.util.Locale;
-import ihm.Affichage;
+import ihm.ControllerExtension;
 import java.io.IOException;
 import java.util.SortedMap;
 import javafx.animation.KeyFrame;
@@ -71,11 +71,6 @@ public class DATAController implements Initializable {
     TableView table;
     @FXML
     static Slider xSlide;
-    static Long deltaX;
-    static double deltaY = 0;
-    static int center;
-    static int oldCenter = 0;
-    static int xSizecounter = 8;
     @FXML
     static CategoryAxis xAxis;// = new NumberAxis(xMin,xMax,deltaX);
     @FXML
@@ -106,26 +101,6 @@ public class DATAController implements Initializable {
     static TextField newVar;
     @FXML
     static TextField newServ;
-    static XYChart.Series series1 = new XYChart.Series();
-    static long sampleDate = System.currentTimeMillis();
-    static EventHandler<ActionEvent> e;
-    static Timer timer = new Timer();
-    static Timeline animation;
-    static int deltaIndex;
-    
-    VariableData selectedVar;
-    ServiceData selectedServ;
-    static SortedMap<Long, Double> sortedData;
-    static Long[] listKey;
-    static Long firstElement;
-    static Long lastElement;
-    // static Collection <ObservableList<SampleData>> allSample ;
-    static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.FRENCH);
-    static int size = 0;
-    static int curentCursor;
-    static int formerCursor;
-    
-    
     @FXML
     static Group groupeMessage;
     @FXML
@@ -145,9 +120,31 @@ public class DATAController implements Initializable {
     static ServiceData selectedServExport;
     public static Collection<VariableData> allVarToExport = new <VariableData> ArrayList();
 
+    static Long deltaX;
+    static double deltaY = 0;
+    static int center;
+    static int oldCenter = 0;
+    static int xSizecounter = 8;
     
+    static XYChart.Series series1 = new XYChart.Series();
+    static long sampleDate = System.currentTimeMillis();
+    static EventHandler<ActionEvent> e;
+    static Timer timer = new Timer();
+    static Timeline animation;
+    static int deltaIndex;
     
-    
+    VariableData selectedVar;
+    ServiceData selectedServ;
+    static SortedMap<Long, Double> sortedData;
+    static Long[] listKey;
+    static Long firstElement;
+    static Long lastElement;
+    // static Collection <ObservableList<SampleData>> allSample ;
+    static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.FRENCH);
+    static int size = 0;
+    static int curentCursor;
+    static int formerCursor;
+     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -222,7 +219,7 @@ public class DATAController implements Initializable {
     @FXML
     public void cursorChanged() {
 
-        Affichage.cursorChanged();
+        ControllerExtension.cursorChanged();
 
     }
 
@@ -231,7 +228,7 @@ public class DATAController implements Initializable {
 
         showMessage();
 
-        Affichage.importData();
+        ControllerExtension.importData();
 
         hideMessage();
 
@@ -273,7 +270,7 @@ public class DATAController implements Initializable {
     }
 
     public void axisteprefresh() {
-        Affichage.axisteprefresh();
+        ControllerExtension.axisteprefresh();
     }
 
     @FXML
@@ -364,29 +361,29 @@ public class DATAController implements Initializable {
                 System.out.println("1");
             } else if (type.equals("Matlab")) {
                 System.out.println("2");
-                ExportData.exportMatlab();
+                //ExportData.exportMatlab();
             }
         }
     }
 
     @FXML
     public void refreshVariableListExport() {
-        Affichage.refreshVariableListExport();
+        ControllerExtension.refreshVariableListExport();
     }
 
     @FXML
     public void refreshVariableListToExport() {
-        Affichage.refreshVariableListToExport();
+        ControllerExtension.refreshVariableListToExport();
     }
 
     @FXML
     public void deleteVariableFromExport() {
-        Affichage.deleteVariableFromExport();
+        ControllerExtension.deleteVariableFromExport();
     }
 
     @FXML
     public void dragVariableToExport() {
-        Affichage.dragVariableToExport();
+        ControllerExtension.dragVariableToExport();
     }
 
     public void cleanDB() {
