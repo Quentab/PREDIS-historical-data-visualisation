@@ -21,30 +21,50 @@
         <slf4j.version>1.6.1</slf4j.version>
     </properties>
 
-    <build>
+   
+
+  
+   <build>
         <plugins>
-
             <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>2.1-SNAPSHOT</version>
-                <configuration>
-
-                    <mainClass>org.gu.vesta.myjfx.MainApp</mainClass>
-
-                    <!-- only required if signing the jar file -->
-                    <keyStoreAlias>example-user</keyStoreAlias>
-                    <keyStorePassword>example-password</keyStorePassword>
-                    <permissions>
-                        <permission>all-permissions</permission>
-                    </permissions>
-
-                </configuration>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>org.gu.vesta.myjfx.Main</mainClass>
+                            
+                            <!-- Optional, default is false -->
+                            <attachToBuild>true</attachToBuild>
+                            <!-- Optional, default is "onejar" -->
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
         </plugins>
     </build>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>onejar-maven-plugin.googlecode.com</id>
+            <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+
+   
+      
+        
+    
+   
+      
+ 
 
     <dependencies>
     

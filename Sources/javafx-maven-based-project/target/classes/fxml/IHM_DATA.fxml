@@ -62,7 +62,7 @@
                                   </yAxis>
                                 </LineChart>
                                 <Slider fx:id="xSlide" blockIncrement="3.0" onKeyReleased="#cursorChanged" onMouseExited="#cursorChanged" prefWidth="515.0" showTickLabels="false" showTickMarks="false" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="16.0" />
-                                <ToolBar prefWidth="166.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="6.0">
+                                <ToolBar prefWidth="166.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
                                   <items>
                                     <Button mnemonicParsing="false" onMouseClicked="#zoomOutXaxis" text=" -" />
                                     <TextField fx:id="textTailleZoom" alignment="CENTER" prefHeight="26.0" prefWidth="76.0" />
@@ -71,15 +71,18 @@
                                 </ToolBar>
                                 <Group id="Group" fx:id="groupeMessage" layoutX="430.0" layoutY="34.0" visible="true">
                                   <children>
-                                    <AnchorPane id="AnchorPane" layoutX="0.0" layoutY="0.0">
+                                    <AnchorPane id="AnchorPane" layoutX="-92.0" layoutY="0.0">
                                       <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0xff0000ff 10.0%, 0x0000ffff 10.0%, 0x000000ff 100.0%)" height="75.9999008178711" layoutX="0.0" layoutY="0.0" stroke="#0021cc" strokeType="INSIDE" strokeWidth="0.0" width="241.0" />
-                                        <Text fill="#ccedff" fontSmoothingType="LCD" layoutX="31.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chargement de la variable" textAlignment="CENTER">
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0xff0000ff 10.0%, 0x0000ffff 10.0%, 0x000000ff 100.0%)" height="104.9999008178711" layoutX="2.0" layoutY="0.0" stroke="#0021cc" strokeType="INSIDE" strokeWidth="0.0" width="376.0" />
+                                        <Text fill="#ccedff" fontSmoothingType="LCD" layoutX="94.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chargement de la variable" textAlignment="CENTER">
                                           <font>
                                             <Font name="System Bold" size="15.0" fx:id="x3" />
                                           </font>
                                         </Text>
-                                        <Text fill="#ccf9ff" font="$x3" layoutX="56.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez patienter" />
+                                        <Text fill="#ccf9ff" font="$x3" layoutX="121.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez patienter" />
+                                        <TextField id="debut" layoutX="22.0" layoutY="46.0" prefWidth="160.0" promptText="Date de début JJ/MM/AAAA" />
+                                        <TextField id="debut" layoutX="190.0" layoutY="46.0" prefWidth="160.0" promptText="Date de début JJ/MM/AAAA" />
+                                        <Button layoutX="129.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#importData" prefWidth="115.0" text="Lancer import" />
                                       </children>
                                     </AnchorPane>
                                   </children>
@@ -124,7 +127,7 @@
                                                       <items>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                           <children>
-                                                            <ListView id="variables" fx:id="allVariablesList1" minWidth="-Infinity" onDragDetected="#addVariableToService" onMouseClicked="#importData" onMouseEntered="#refreshAllVariableList" prefHeight="235.0" prefWidth="355.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
+                                                            <ListView id="variables" fx:id="allVariablesList1" minWidth="-Infinity" onDragDetected="#addVariableToService" onMouseClicked="#showMessage" onMouseEntered="#refreshAllVariableList" prefHeight="235.0" prefWidth="355.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
                                                             <Label font="$x1" layoutX="14.0" prefHeight="19.0" prefWidth="76.0" text="All Variables" AnchorPane.topAnchor="0.0" />
                                                           </children>
                                                         </AnchorPane>
@@ -161,7 +164,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                   <children>
-                                                    <SplitPane dividerPositions="0.4411057692307692" focusTraversable="true" prefHeight="450.0" prefWidth="752.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                                    <SplitPane dividerPositions="0.38822115384615385" focusTraversable="true" prefHeight="450.0" prefWidth="752.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                                                       <items>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                           <children>
@@ -171,34 +174,48 @@
                                                         </AnchorPane>
                                                         <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="506.0">
                                                           <children>
-                                                            <SplitPane dividerPositions="0.6652719665271967" focusTraversable="true" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="253.0" prefWidth="488.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <SplitPane dividerPositions="0.6569037656903766" focusTraversable="true" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="253.0" prefWidth="488.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                               <items>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                                   <children>
                                                                     <ListView fx:id="listVariableToExport" onMouseClicked="#deleteVariableFromExport" prefHeight="96.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0" />
-                                                                    <Label layoutX="14.0" layoutY="6.0" text="Variable a exporter" />
+                                                                    <Label layoutX="14.0" layoutY="6.0" text="Variables a exporter" />
                                                                   </children>
                                                                 </AnchorPane>
-                                                                <AnchorPane maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="77.0" prefWidth="462.0">
+                                                                <AnchorPane maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="79.0" prefWidth="504.0">
                                                                   <children>
-                                                                    <ToolBar maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="77.0" prefWidth="462.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <Button mnemonicParsing="false" onMouseClicked="#exportData" prefWidth="112.0001220703125" text="Lancer Export" AnchorPane.leftAnchor="377.0" AnchorPane.topAnchor="51.0" />
+                                                                    <TextField fx:id="fin" prefWidth="157.0" promptText="Date de fin  JJ/MM/AAAA" AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="14.0" />
+                                                                    <TextField fx:id="debut" prefWidth="160.0" promptText="Date de début JJ/MM/AAAA" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="14.0" />
+                                                                    <ChoiceBox fx:id="typeExportChoice" onMouseExited="#exportData" prefWidth="113.0" AnchorPane.leftAnchor="377.0" AnchorPane.topAnchor="26.0">
                                                                       <items>
-                                                                        <ChoiceBox fx:id="typeExportChoice" onMouseExited="#exportData" prefWidth="94.0">
-                                                                          <items>
-                                                                            <FXCollections fx:factory="observableArrayList">
-                                                                              <String fx:value="Item 1" />
-                                                                              <String fx:value="Item 2" />
-                                                                              <String fx:value="Item 3" />
-                                                                            </FXCollections>
-                                                                          </items>
-                                                                        </ChoiceBox>
-                                                                        <TextField prefWidth="114.0" promptText="Date de début" />
-                                                                        <TextField prefWidth="114.0" promptText="Date de fin" />
-                                                                        <Button mnemonicParsing="false" onMouseClicked="#exportData" prefWidth="94.0" text="Lancer Export" />
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                          <String fx:value="Item 1" />
+                                                                          <String fx:value="Item 2" />
+                                                                          <String fx:value="Item 3" />
+                                                                        </FXCollections>
                                                                       </items>
-                                                                    </ToolBar>
-                                                                    <Slider fx:id="sliderFin" blockIncrement="1.0" layoutX="10.0" layoutY="50.0" prefWidth="427.0" snapToTicks="false" value="100.0" />
-                                                                    <Slider fx:id="sliderDebut" layoutX="10.0" layoutY="58.0" prefWidth="425.0" showTickLabels="false" showTickMarks="false" />
+                                                                    </ChoiceBox>
+                                                                    <ChoiceBox fx:id="stepTime" minHeight="19.0" prefHeight="20.0" prefWidth="57.0" AnchorPane.leftAnchor="377.0" AnchorPane.topAnchor="4.0">
+                                                                      <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                          <String fx:value="Item 1" />
+                                                                          <String fx:value="Item 2" />
+                                                                          <String fx:value="Item 3" />
+                                                                        </FXCollections>
+                                                                      </items>
+                                                                    </ChoiceBox>
+                                                                    <ChoiceBox id="stepTime" fx:id="unitTime" minHeight="18.0" prefHeight="20.0" prefWidth="54.0" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="4.0">
+                                                                      <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                          <String fx:value="Item 1" />
+                                                                          <String fx:value="Item 2" />
+                                                                          <String fx:value="Item 3" />
+                                                                        </FXCollections>
+                                                                      </items>
+                                                                    </ChoiceBox>
+                                                                    <TextField id="debut" fx:id="heureDebut" prefWidth="159.00009999999747" promptText="Heure de début HH:MM:SS" text="" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="41.0" />
+                                                                    <TextField id="debut" fx:id="heureFin" layoutX="199.0" layoutY="45.0" prefWidth="153.0" promptText="Heure de fin  HH:MM:SS" text="" />
                                                                   </children>
                                                                 </AnchorPane>
                                                               </items>

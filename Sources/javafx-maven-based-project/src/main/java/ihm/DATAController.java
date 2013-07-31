@@ -110,6 +110,10 @@ public class DATAController implements Initializable {
     @FXML
     static ChoiceBox typeExportChoice;
     @FXML
+    static ChoiceBox unitTime;
+    @FXML
+    static ChoiceBox stepTime;
+    @FXML
     static Slider sliderDebut;
     @FXML
     static Slider sliderFin;
@@ -117,6 +121,11 @@ public class DATAController implements Initializable {
     static TextField dateDebut;
     @FXML
     static TextField dateFin;
+    @FXML
+    static TextField heureFin;
+    @FXML
+    static TextField heureDebut;
+    
     static ServiceData selectedServExport;
     public static Collection<VariableData> allVarToExport = new <VariableData> ArrayList();
 
@@ -187,6 +196,23 @@ public class DATAController implements Initializable {
         choixExport.add("Matlab");
         typeExportChoice.setItems(choixExport);
 
+        ObservableList <Integer> stepTimeItems = FXCollections.observableArrayList();
+        
+        stepTimeItems.add(1);
+        stepTimeItems.add(2);
+        stepTimeItems.add(3);
+        stepTimeItems.add(5);
+        stepTimeItems.add(6);
+        stepTimeItems.add(10);
+        stepTimeItems.add(12);
+        stepTimeItems.add(30);
+        
+         ObservableList<String> unitTimeItems = FXCollections.observableArrayList();
+         unitTimeItems.add("S");
+         unitTimeItems.add("M");
+         unitTimeItems.add("H");
+         unitTimeItems.add("J");
+        unitTime.setItems(stepTimeItems);
 
     }
 
@@ -227,9 +253,9 @@ public class DATAController implements Initializable {
     public void importData() {
 
         showMessage();
-
+        
         ControllerExtension.importData();
-
+        
         hideMessage();
 
     }
@@ -353,17 +379,46 @@ public class DATAController implements Initializable {
     }
 
     @FXML
-    public void exportData() throws IOException {
-
+    public void exportData() throws IOException, ParseException {
+        
+        String stepUnit = (String)unitTime.getSelectionModel().getSelectedItem();
+        Long steptime = (Long)stepTime.getSelectionModel().getSelectedItem();
+        Long step = 0L;
+        
+        if (!stepUnit.isEmpty() && stepTime != null){
+        
+        String hDebut = heureDebut.getText();
+        String hFin = heureFin.getText();
+       
+        
+        if (hDebut == null){hDebut="00:00:00";}
+        if (hFin == null){hFin="00:00:00";}
+        //On converti le pas en secondes
+        Date datDebut = sdf.parse(dateDebut.getText()+hDebut);
+        Long debut = datDebut.getTime();
+        Date datFin = sdf.parse(dateFin.getText()+hFin);
+        Long fin = datFin.getTime();
+        
+        if(stepUnit.contains("S")){
+            step = steptime;
+        }else if (stepUnit.contains("M")){
+            step = steptime*60;
+        }else if (stepUnit.contains("H")){
+            step = steptime*3600;
+        }else if (stepUnit.contains("J")){
+            step = steptime*3600*24;
+        }
+        
         if (typeExportChoice.getValue() != null) {
             String type = (String) typeExportChoice.getSelectionModel().getSelectedItem();
             if (type.equals("CSV")) {
-                System.out.println("1");
+                System.out.println("CSV");
             } else if (type.equals("Matlab")) {
-                System.out.println("2");
-                //ExportData.exportMatlab();
+                System.out.println("Matlab debut:"+debut+" fin:"+fin+" step:"+step );
+                ExportData.exportMatlab(allVarToExport,debut,fin,step);
             }
         }
+      }
     }
 
     @FXML

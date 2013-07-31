@@ -26,7 +26,7 @@ public class SampleData implements Serializable {
     @Column(name = "variableId", nullable = false)
     private long variableId;
 
-    @Column(nullable = false)
+    @Column(name = "sampleDate", nullable = false)
     private long sampleDate;
 
     @Column

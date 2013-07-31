@@ -93,11 +93,11 @@ public class ControllerExtension {
         refreshVariableListToExport();
     }
 
-    /**
-     *
-     * This method is called to change the size of the window
- *
-     */
+   /**
+    *
+    * This method is called to change the size of the window
+    *
+    */
     static void axisteprefresh() {
 
         System.out.println("conteur de zoom : " + xSizecounter);
@@ -161,7 +161,7 @@ public class ControllerExtension {
 
     /**
      * Import the data of the considered variable into the field map sortedData
-     * (can take time for big series)
+     * (can take a while for big series)
      */
     static public void importData() {
         System.out.println("methode IMPORT DATA");
@@ -174,6 +174,7 @@ public class ControllerExtension {
         }
         if (var != null) {
             sortedData = DAO.getServiceVariableValues(var);
+            if(!sortedData.isEmpty()){
             firstElement = sortedData.firstKey();
             lastElement = sortedData.lastKey();
             size = sortedData.keySet().size();
@@ -182,10 +183,13 @@ public class ControllerExtension {
             System.out.println("firstElement = " + firstElement);
             System.out.println("lastElement = " + lastElement);
             System.out.println("deltaX = " + deltaX);
-        }
-        System.out.println("fin methode IMPORT DATA ");
-
+            
+            System.out.println("fin methode IMPORT DATA ");
+        }else{
+            System.out.println("Variable Vide");
+            }
         cursorChanged();
+        }
 
     }
 

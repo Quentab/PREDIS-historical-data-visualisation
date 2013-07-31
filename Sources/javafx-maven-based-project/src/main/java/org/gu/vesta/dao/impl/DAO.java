@@ -150,6 +150,18 @@ public class DAO {
         return retValue;
     }
 
+    
+      public static Collection<SampleData> getSamplesTimeInterval(long variableId,Long startDate,Long endDate) {
+        Session session = sessionFactory.openSession();
+        Criteria criteria = session.createCriteria(SampleData.class);
+        criteria.add(Restrictions.like("variableId", variableId));
+        criteria.add(Restrictions.between("sampleDate",startDate, endDate));
+        System.out.println("collecte des samples");
+        Collection<SampleData> retValue = (Collection<SampleData>) criteria.list();
+        System.out.println("envoi des samples");
+        session.close();
+        return retValue;
+    }
     /**
      * Get all the samples
      * @return all the samples
@@ -270,11 +282,13 @@ public class DAO {
     public static SortedMap<Long, Double> getServiceVariableValues(VariableData variable) {
         SortedMap<Long, Double> retValue = new TreeMap<Long, Double>();
         Collection<SampleData> sampleDatas = getSamples(variable);
-        for (SampleData sampleData : sampleDatas) {
+        for (SampleData sampleData : sampleDatas){
             retValue.put(sampleData.getSampleDate(), sampleData.getSampleValue());
         }
         return retValue;
     }
+    
+    
 
     /**
      * Delete all the services

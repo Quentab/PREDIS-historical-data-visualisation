@@ -4,6 +4,7 @@
  */
 package diagnostic;
 
+import static ihm.DATAController.allVarToExport;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +19,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.SortedMap;
 import org.gu.vesta.dao.impl.DAO;
+import org.gu.vesta.dao.impl.hal.ExportData;
 import org.gu.vesta.dao.impl.model.SampleData;
 import org.gu.vesta.dao.impl.model.VariableData;
 
@@ -28,32 +31,54 @@ import org.gu.vesta.dao.impl.model.VariableData;
  */
 public class Bigseriefinding{
  
-    static long maximumHoleTime =  48*60*60 * 1000; //= 1h 
+    static long maximumHoleTime =  60*60 * 1000; //= 1h 
     static List<SampleData> serieSansTrou = new ArrayList();
-    static List<List> allSeries = new ArrayList();
-    static VariableData[] vars;
+    static SortedMap <Integer,List>  allSeries ;
     static List<Long> listeDate = new ArrayList();
+    static Collection allBigSeries;
     static long debut;
     static long fin;
     static long veryDebut;
     static long veryFin;
     static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",Locale.FRENCH);
-
+ 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException {
 
+        Collection <VariableData> vars = DAO.getAllVariables();
+        
         writeEnTete();
-        System.out.println("début recherche");
-        recherche();
-        System.out.println("Récap : nombre de série isolées : "+ allSeries.size());
+        
+        for(VariableData variable : vars){
+         
+            recherche(variable);
+            System.out.println("Récap : nombre de série isolées : "+ allSeries.size());
+            System.out.println("taille de la plus grande : "+allSeries.lastKey());
+            System.out.println("taille de la plus petite : "+allSeries.firstKey()); 
+            
+        //Export matlab de la plus grande serie avec un pas de 1
+           
+            //allBigSeries.add();
+            
+            
+            Collection oneVar= new ArrayList();
+            oneVar.add(variable);
+            long debut = (Long)allSeries.get(allSeries.lastKey()).get(0);
+            long fin = (Long)allSeries.get(allSeries.lastKey()).get(allSeries.get(allSeries.lastKey()).size()-1);
+            
+            ExportData.exportMatlab(oneVar,debut,fin,60*60*1000);
+            
+            allSeries.clear();
+        }
+       
         System.out.println("very fin");
     }
 
-    public static void recherche() throws IOException {
+    public static void recherche(VariableData var) throws IOException {
 
-        vars = DAO.getAllVariables().toArray(new VariableData[0]);
+         System.out.println("début recherche pour la variable : "+var.getName());
 
         debut = System.currentTimeMillis();
-        Iterator<SampleData> iter = DAO.getSamples(vars[3]).iterator();
+        Iterator<SampleData> iter = DAO.getSamples(var).iterator();
         fin = System.currentTimeMillis();
 
         while (iter.hasNext()) {
@@ -73,7 +98,7 @@ public class Bigseriefinding{
             } else {// trou détecté
                  
                 System.out.println("Trou DETECTE || nombre de sample sans trou précédent : "+listeDate.size() );
-                allSeries.add(listeDate);
+                allSeries.put(listeDate.size(),listeDate);
                 publicationResultat("\r\n" + sdf.format(new Date((Long) listeDate.get(0))) + "\t" + sdf.format(new Date((Long) listeDate.get(listeDate.size()-1))) + "\t" + ((Long) listeDate.get(listeDate.size()-1) - (Long) listeDate.get(0))/1000 + "\t" + (fin - debut));
                 listeDate.clear();
             }

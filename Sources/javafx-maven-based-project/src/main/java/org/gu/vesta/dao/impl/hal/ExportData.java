@@ -37,37 +37,45 @@ public class ExportData {
  * @param debut l'export partira de ce point 
  * @param fin l'export finira par ce point 
  */ 
-    public static void exportMatlab(long debut,long fin,long stepTime) throws IOException{
+    public static void exportMatlab(Collection <VariableData> varToExport,long debut,long fin,long stepTime) throws IOException{
+       
+        //Decodage de l'echelle de temps 
         
         long rapport=1;
         String unity = "S";
         if(stepTime>60){unity="M";rapport=60;}
         else if(stepTime>3600){unity="H";rapport=3600;}
-        else if(stepTime>3600*24){unity="J";rapport=3600*60;}
+        else if(stepTime>3600*24){unity="J";rapport=3600*24;}
         
         ArrayList  list = new ArrayList();
         ArrayList <Double> date = new ArrayList();
-        for (VariableData variable : allVarToExport) {
+        for (VariableData variable : varToExport) {
       
             SortedMap map = DAO.getServiceVariableValues(variable);
             
-            int keyDebut = keySeeker(map.keySet(), debut);
-            int keyFin   = keySeeker(map.keySet(), debut);
+            // recherche des clefs pour la submap
+            
+            Long keyDebut = keySeeker(map.keySet(), debut);
+            Long keyFin   = keySeeker(map.keySet(), fin);
             
             SortedMap submap = map.subMap(keyDebut, keyFin);
             
             Iterator iterator = submap.keySet().iterator();
             ArrayList <Double> value = new ArrayList();
             
-          if(stepTime==0){ //Pas temporel null
+           
+          if(stepTime==0){ //Pas temporel null = données brutes
             while(iterator.hasNext()){
                 Object key = iterator.next();
                 Long tempDate = (Long) key;
-                date.add(tempDate.doubleValue());
+                if(list.size()>=2){//On ne rempli la date qu'une seule fois
+                    date.add(tempDate.doubleValue()-keyDebut.doubleValue()); //On part de 0 pour la date   
+                }
                 value.add((Double)submap.get(key));
-            }
+             }
           }else if(stepTime>0){
              
+            
              long previousDate=0; 
              
              while(iterator.hasNext()){
@@ -75,20 +83,22 @@ public class ExportData {
                 
                 if(((Long)key-previousDate)>=stepTime){
                     Long tempDate = (Long) key;
-                    date.add(tempDate.doubleValue());
+                    if(list.size()>=2){//On ne rempli la date qu'une seule fois
+                        date.add(tempDate.doubleValue()-keyDebut.doubleValue());
+                    }
                     value.add((Double)submap.get(key));
                 }
               previousDate=(Long)key;   
             } 
           }
-             //MLDouble mlValue = new MLDouble(variable.getName() , value.toArray(new Double[0]), 3 );
+             
              
              Double[] mab = date.toArray(new Double[0]);
              double[] src = ArrayUtils.toPrimitive(mab);
              System.out.println(src.toString());
              MLDouble mlDate = new MLDouble( "Temps",src , 1 );//
              MLDouble mlValue = new MLDouble( variable.getName(),value.toArray(new Double[0]) , 1 );   
-             if(!list.contains(mlDate)){
+             if(list.size()>=2){//On ne met la liste date qu'une seule fois
              list.add(mlDate);
              }
              list.add(mlValue);
@@ -109,20 +119,17 @@ public class ExportData {
         
     }
     
-    public static int keySeeker( Set keySet,long date){
+    public static Long keySeeker( Set keySet,long date){
         
-        int i=0;
+        
         Iterator <Long> iter = keySet.iterator();
-        long key;
-        key = iter.next();
+        long key= iter.next();
         
-        while(key<date){ 
-            
+        while(key<date){      
             key = iter.next();
-            i++;
         }
         
-        return i;
+        return key;
     }
     
     
